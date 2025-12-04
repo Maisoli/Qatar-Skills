@@ -1,0 +1,81 @@
+STEP-BY-STEP DEPLOYMENT GUIDE
+==============================
+
+Follow these exact steps:
+
+STEP 1: Download All Files
+---------------------------
+✓ Download all 6 HTML files from this folder
+✓ Keep them in one place on your computer
+
+
+STEP 2: Go to Your GitHub Repository
+-------------------------------------
+1. Open: https://github.com/Maisoli/Qatar-Skills
+2. You should see your 4 old files (1.1, 1.2, 1.3, 1.4)
+
+
+STEP 3: Delete Old Files (Important!)
+--------------------------------------
+For EACH old file:
+1. Click on the filename
+2. Click the TRASH icon 🗑️ (top right)
+3. Scroll down and click "Commit changes"
+
+Delete these files:
+- 1.1 AI-design-revolution .html
+- 1.2 ai-vs-oldschool-comparison.html
+- 1.3 Architectural-prompt-builder.html
+- 1.4 complete-prompt-library.html
+
+
+STEP 4: Upload New Files
+-------------------------
+1. Click "Add file" button (green button)
+2. Click "Upload files"
+3. DRAG ALL 6 NEW FILES at once:
+   - index.html
+   - design-revolution.html
+   - comparison.html
+   - ai-prompt-builder.html
+   - prompt-library.html
+   - sref-library.html
+4. Scroll down
+5. Click "Commit changes" (green button)
+
+
+STEP 5: Wait for Vercel to Deploy
+----------------------------------
+1. Go to: https://vercel.com/dashboard
+2. Click on your "Qatar-Skills" project
+3. Wait 30-60 seconds (you'll see "Building..." then "Ready")
+
+
+STEP 6: Visit Your Site!
+-------------------------
+Open: https://qatar-skills.vercel.app
+
+You should see:
+✓ Beautiful homepage with 5 cards
+✓ Click any card to navigate
+✓ All pages working perfectly
+✓ AI Prompt Builder - Interactive tool
+✓ SREF Library - 100+ style codes
+
+
+TROUBLESHOOTING
+===============
+
+Problem: Still seeing 404
+Solution: Make sure index.html uploaded correctly
+
+Problem: Old pages still showing
+Solution: Hard refresh browser (Ctrl+Shift+R or Cmd+Shift+R)
+
+Problem: Files not uploading
+Solution: Make sure you deleted old files first
+
+
+DONE! 🎉
+========
+Your site is now live with clean URLs and a professional homepage!

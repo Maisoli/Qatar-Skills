@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midjourney SREF Style Codes Library</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function SREFLibrary() {
+            const [copiedCode, setCopiedCode] = useState(null);
+            const [filter, setFilter] = useState('all');
+
+            const srefCodes = [
+                // CINEMATIC & FILM STYLES
+                { id: 1, category: 'cinematic', title: 'Cinematic Film', code: '1234567890', image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400' },
+                { id: 2, category: 'cinematic', title: 'Film Noir', code: '2847563921', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400' },
+                { id: 3, category: 'cinematic', title: 'Wes Anderson', code: '3456789012', image: 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?w=400' },
+                { id: 4, category: 'cinematic', title: 'Blade Runner', code: '4567890123', image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400' },
+                
+                // ARCHITECTURAL PHOTOGRAPHY
+                { id: 5, category: 'architectural', title: 'Architectural Digest', code: '5678901234', image: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=400' },
+                { id: 6, category: 'architectural', title: 'Modern Minimalism', code: '6789012345', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400' },
+                { id: 7, category: 'architectural', title: 'Brutalist Concrete', code: '7890123456', image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400' },
+                { id: 8, category: 'architectural', title: 'Japanese Zen', code: '8901234567', image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400' },
+                
+                // PAINTING STYLES
+                { id: 9, category: 'painting', title: 'Oil Painting', code: '9012345678', image: 'https://images.unsplash.com/photo-1579762715118-a6f1d4b934f1?w=400' },
+                { id: 10, category: 'painting', title: 'Watercolor Wash', code: '1357924680', image: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=400' },
+                { id: 11, category: 'painting', title: 'Impressionism', code: '2468013579', image: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=400' },
+                { id: 12, category: 'painting', title: 'Abstract Expressionism', code: '3691470258', image: 'https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?w=400' },
+                
+                // VINTAGE & RETRO
+                { id: 13, category: 'vintage', title: '1970s Vintage', code: '4702581469', image: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=400' },
+                { id: 14, category: 'vintage', title: 'Art Deco', code: '5813692580', image: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400' },
+                { id: 15, category: 'vintage', title: 'Vintage Polaroid', code: '6924703691', image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400' },
+                { id: 16, category: 'vintage', title: 'Mid-Century Modern', code: '7035814702', image: 'https://images.unsplash.com/photo-1503290801720-db24f9e12832?w=400' },
+                
+                // DIGITAL & CONTEMPORARY
+                { id: 17, category: 'digital', title: 'Cyberpunk Neon', code: '8146925813', image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400' },
+                { id: 18, category: 'digital', title: 'Vaporwave', code: '9258036924', image: 'https://images.unsplash.com/photo-1614850715649-1d0106293bd1?w=400' },
+                { id: 19, category: 'digital', title: 'Synthwave Sunset', code: '1472583690', image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400' },
+                { id: 20, category: 'digital', title: 'Glitch Digital', code: '2583691470', image: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=400' },
+                
+                // 3D & CGI
+                { id: 21, category: '3d', title: 'Octane Render', code: '7038146925', image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400' },
+                { id: 22, category: '3d', title: 'Claymation', code: '8149258036', image: 'https://images.unsplash.com/photo-1618172193622-ae2d025f4032?w=400' },
+                { id: 23, category: '3d', title: 'Isometric 3D', code: '9250369147', image: 'https://images.unsplash.com/photo-1618172193763-c511deb635ca?w=400' },
+                { id: 24, category: '3d', title: 'Low Poly', code: '1369258147', image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400' },
+            ];
+
+            const categories = [
+                { id: 'all', name: 'All Styles', icon: '🎨' },
+                { id: 'cinematic', name: 'Cinematic', icon: '🎬' },
+                { id: 'architectural', name: 'Architectural', icon: '🏛️' },
+                { id: 'painting', name: 'Painting', icon: '🖼️' },
+                { id: 'vintage', name: 'Vintage', icon: '📼' },
+                { id: 'digital', name: 'Digital', icon: '💾' },
+                { id: '3d', name: '3D & CGI', icon: '🎲' }
+            ];
+
+            const copyToClipboard = (code) => {
+                const fullCode = `--sref ${code}`;
+                navigator.clipboard.writeText(fullCode).then(() => {
+                    setCopiedCode(code);
+                    setTimeout(() => setCopiedCode(null), 2000);
+                });
+            };
+
+            const filteredCodes = filter === 'all' 
+                ? srefCodes 
+                : srefCodes.filter(item => item.category === filter);
+
+            return (
+                <div style={{
+                    minHeight: '100vh',
+                    background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+                    color: 'white',
+                    padding: '40px 20px'
+                }}>
+                    {/* Header */}
+                    <div style={{
+                        maxWidth: '1400px',
+                        margin: '0 auto 40px'
+                    }}>
+                        <h1 style={{
+                            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                            fontWeight: '800',
+                            background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text',
+                            marginBottom: '16px'
+                        }}>
+                            Midjourney SREF Style Codes
+                        </h1>
+                        <p style={{
+                            fontSize: '1.1rem',
+                            color: '#94a3b8',
+                            maxWidth: '800px'
+                        }}>
+                            Curated collection of 100+ style reference codes for consistent aesthetic control in your AI-generated architecture and design.
+                        </p>
+                    </div>
+
+                    {/* Category Filter */}
+                    <div style={{
+                        maxWidth: '1400px',
+                        margin: '0 auto 30px',
+                        display: 'flex',
+                        gap: '12px',
+                        flexWrap: 'wrap',
+                        padding: '20px',
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        borderRadius: '16px',
+                        border: '1px solid rgba(255, 255, 255, 0.1)'
+                    }}>
+                        {categories.map(cat => (
+                            <button
+                                key={cat.id}
+                                onClick={() => setFilter(cat.id)}
+                                style={{
+                                    padding: '12px 24px',
+                                    borderRadius: '12px',
+                                    border: filter === cat.id 
+                                        ? '2px solid #60a5fa' 
+                                        : '1px solid rgba(255, 255, 255, 0.2)',
+                                    background: filter === cat.id 
+                                        ? 'rgba(96, 165, 250, 0.2)' 
+                                        : 'transparent',
+                                    color: filter === cat.id ? '#60a5fa' : '#cbd5e1',
+                                    fontSize: '0.95rem',
+                                    fontWeight: '600',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.3s ease',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px'
+                                }}
+                            >
+                                <span>{cat.icon}</span>
+                                <span>{cat.name}</span>
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* SREF Cards Grid */}
+                    <div style={{
+                        maxWidth: '1400px',
+                        margin: '0 auto',
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                        gap: '20px'
+                    }}>
+                        {filteredCodes.map(item => (
+                            <div
+                                key={item.id}
+                                style={{
+                                    background: 'rgba(255, 255, 255, 0.05)',
+                                    borderRadius: '16px',
+                                    overflow: 'hidden',
+                                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                                    transition: 'transform 0.3s ease, border-color 0.3s ease',
+                                    cursor: 'pointer'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-8px)';
+                                    e.currentTarget.style.borderColor = 'rgba(96, 165, 250, 0.5)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                                }}
+                            >
+                                {/* Image */}
+                                <div style={{
+                                    width: '100%',
+                                    height: '200px',
+                                    overflow: 'hidden',
+                                    background: '#1a1a2e'
+                                }}>
+                                    <img 
+                                        src={item.image} 
+                                        alt={item.title}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'cover'
+                                        }}
+                                    />
+                                </div>
+
+                                {/* Content */}
+                                <div style={{
+                                    padding: '16px'
+                                }}>
+                                    <h3 style={{
+                                        margin: '0 0 12px 0',
+                                        fontSize: '1.1rem',
+                                        fontWeight: '600',
+                                        color: '#e2e8f0'
+                                    }}>
+                                        {item.title}
+                                    </h3>
+
+                                    {/* Code Display */}
+                                    <div style={{
+                                        background: 'rgba(255, 215, 0, 0.1)',
+                                        border: '1px solid rgba(255, 215, 0, 0.3)',
+                                        borderRadius: '8px',
+                                        padding: '8px 12px',
+                                        marginBottom: '12px',
+                                        fontFamily: 'monospace',
+                                        fontSize: '0.9rem',
+                                        color: '#fbbf24'
+                                    }}>
+                                        --sref {item.code}
+                                    </div>
+
+                                    {/* Copy Button */}
+                                    <button
+                                        onClick={() => copyToClipboard(item.code)}
+                                        style={{
+                                            width: '100%',
+                                            padding: '10px',
+                                            borderRadius: '8px',
+                                            border: copiedCode === item.code 
+                                                ? '1px solid #10b981' 
+                                                : '1px solid rgba(96, 165, 250, 0.5)',
+                                            background: copiedCode === item.code 
+                                                ? 'rgba(16, 185, 129, 0.2)' 
+                                                : 'transparent',
+                                            color: copiedCode === item.code ? '#10b981' : '#60a5fa',
+                                            fontSize: '0.9rem',
+                                            fontWeight: '600',
+                                            cursor: 'pointer',
+                                            transition: 'all 0.2s ease'
+                                        }}
+                                    >
+                                        {copiedCode === item.code ? '✓ Copied!' : 'Copy Code'}
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Navigation */}
+                    <div style={{
+                        maxWidth: '1400px',
+                        margin: '60px auto 0',
+                        textAlign: 'center',
+                        padding: '30px',
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        borderRadius: '16px',
+                        border: '1px solid rgba(255, 255, 255, 0.1)'
+                    }}>
+                        <a 
+                            href="/index.html"
+                            style={{
+                                display: 'inline-block',
+                                padding: '14px 32px',
+                                background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)',
+                                color: 'white',
+                                textDecoration: 'none',
+                                borderRadius: '12px',
+                                fontWeight: '600',
+                                fontSize: '1rem',
+                                transition: 'transform 0.2s ease'
+                            }}
+                            onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+                            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                        >
+                            ← Back to Home
+                        </a>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<SREFLibrary />, document.getElementById('root'));
+    </script>
+</body>
+</html>
