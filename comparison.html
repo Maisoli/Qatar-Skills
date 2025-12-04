@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI vs Old School Process Comparison</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function ProcessComparison() {
+          const [selectedMetric, setSelectedMetric] = useState(null);
+
+          const comparisonData = [
+            {
+              id: 'drafting',
+              metric: 'Initial Drafting Time',
+              icon: '✏️',
+              oldSchool: {
+                value: '80%',
+                description: 'Manual drafting consumes the majority of project time',
+                details: 'Hand-drawing floor plans, elevations, and sections requires extensive time investment',
+                color: '#7f1d1d'
+              },
+              aiAided: {
+                value: '20%',
+                description: 'AI generates base layouts in minutes',
+                details: 'Automated floor plan generation and intelligent space planning reduce initial drafting to a fraction',
+                color: '#14532d',
+                improvement: '75% Faster'
+              }
+            },
+            {
+              id: 'revisions',
+              metric: 'Design Revisions Cycle',
+              icon: '🔄',
+              oldSchool: {
+                value: '60%',
+                description: 'Revisions take majority of project cycle',
+                details: 'Each client change requires manual redrawing, recalculation, and documentation updates',
+                color: '#7f1d1d'
+              },
+              aiAided: {
+                value: '10%',
+                description: 'Minimal revision time with instant updates',
+                details: 'Parametric design allows instant iterations and automatic documentation updates',
+                color: '#14532d',
+                improvement: '83% Reduction'
+              }
+            },
+            {
+              id: 'changes',
+              metric: 'Major Design Changes',
+              icon: '⚡',
+              oldSchool: {
+                value: '5-7 Days',
+                description: 'Significant time investment per major change',
+                details: 'Major changes require complete redrawing of affected plans, sections, and details',
+                color: '#7f1d1d'
+              },
+              aiAided: {
+                value: '2-4 Hours',
+                description: 'Near-instant propagation of changes',
+                details: 'AI-powered BIM tools automatically update all related drawings and schedules',
+                color: '#14532d',
+                improvement: '95% Faster'
+              }
+            },
+            {
+              id: 'coordination',
+              metric: 'Multi-Discipline Coordination',
+              icon: '👥',
+              oldSchool: {
+                value: '15-20%',
+                description: 'Significant time spent on coordination',
+                details: 'Manual clash detection and coordination meetings consume substantial project time',
+                color: '#7f1d1d'
+              },
+              aiAided: {
+                value: '3-5%',
+                description: 'Automated conflict detection',
+                details: 'AI identifies clashes instantly and suggests resolutions automatically',
+                color: '#14532d',
+                improvement: '75% Reduction'
+              }
+            },
+            {
+              id: 'efficiency',
+              metric: 'Overall Project Efficiency',
+              icon: '📊',
+              oldSchool: {
+                value: 'Baseline',
+                description: 'Traditional workflow efficiency standard',
+                details: 'Sequential workflow with limited parallel processing and manual quality checks',
+                color: '#7f1d1d'
+              },
+              aiAided: {
+                value: '+400%',
+                description: 'Massive productivity increase',
+                details: 'Parallel processing, automated checks, and AI assistance multiply output capacity',
+                color: '#14532d',
+                improvement: '4x More Productive'
+              }
+            },
+            {
+              id: 'visualization',
+              metric: 'Visualization & Rendering',
+              icon: '🎨',
+              oldSchool: {
+                value: '48-72 Hours',
+                description: 'Days to produce quality renders',
+                details: 'Manual 3D modeling and overnight rendering for each view',
+                color: '#7f1d1d'
+              },
+              aiAided: {
+                value: '5-15 Minutes',
+                description: 'Real-time photorealistic renders',
+                details: 'AI generates professional-quality visualizations from simple sketches instantly',
+                color: '#14532d',
+                improvement: '99% Faster'
+              }
+            },
+            {
+              id: 'documentation',
+              metric: 'Technical Documentation',
+              icon: '📋',
+              oldSchool: {
+                value: '25-30%',
+                description: 'Large portion of time on documentation',
+                details: 'Manual schedules, specifications, and detail drawings require extensive time',
+                color: '#7f1d1d'
+              },
+              aiAided: {
+                value: '5-8%',
+                description: 'Auto-generated documentation',
+                details: 'AI automatically generates schedules, specifications, and coordinates details',
+                color: '#14532d',
+                improvement: '75% Reduction'
+              }
+            },
+            {
+              id: 'errors',
+              metric: 'Error Rate & Rework',
+              icon: '⚠️',
+              oldSchool: {
+                value: '12-15%',
+                description: 'Significant time lost to errors',
+                details: 'Manual processes prone to human error requiring costly rework',
+                color: '#7f1d1d'
+              },
+              aiAided: {
+                value: '2-3%',
+                description: 'AI validation reduces errors',
+                details: 'Automated checking and validation catches issues before they become problems',
+                color: '#14532d',
+                improvement: '80% Fewer Errors'
+              }
+            }
+          ];
+
+          return (
+            <div style={{
+              width: '100%',
+              minHeight: '100vh',
+              background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+              padding: '60px 20px',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+            }}>
+              <div style={{
+                maxWidth: '1400px',
+                margin: '0 auto'
+              }}>
+                {/* Header */}
+                <div style={{
+                  textAlign: 'center',
+                  marginBottom: '50px'
+                }}>
+                  <h1 style={{
+                    fontSize: '48px',
+                    fontWeight: '700',
+                    margin: '0 0 16px 0',
+                    color: 'white',
+                    textTransform: 'uppercase',
+                    letterSpacing: '2px'
+                  }}>
+                    AI AIDED vs. OLD SCHOOL PROCESS STATISTICS
+                  </h1>
+                  <p style={{
+                    fontSize: '18px',
+                    color: '#94a3b8',
+                    margin: '0 0 24px 0'
+                  }}>
+                    Comprehensive comparison of traditional vs AI-powered architectural workflows
+                  </p>
+                  <div style={{
+                    display: 'inline-block',
+                    padding: '8px 20px',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    borderRadius: '20px',
+                    fontSize: '13px',
+                    color: '#cbd5e1'
+                  }}>
+                    📊 Based on industry research and case studies
+                  </div>
+                </div>
+
+                {/* Comparison Table */}
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  borderRadius: '24px',
+                  overflow: 'hidden',
+                  border: '2px solid rgba(255, 255, 255, 0.1)'
+                }}>
+                  {/* Table Header */}
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '2fr 3fr 3fr',
+                    background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
+                    borderBottom: '3px solid rgba(255, 255, 255, 0.2)'
+                  }}>
+                    <div style={{
+                      padding: '24px',
+                      borderRight: '2px solid rgba(255, 255, 255, 0.1)'
+                    }}>
+                      <h2 style={{
+                        margin: 0,
+                        fontSize: '20px',
+                        fontWeight: '700',
+                        color: '#e2e8f0',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px'
+                      }}>
+                        Metric
+                      </h2>
+                    </div>
+                    <div style={{
+                      padding: '24px',
+                      background: 'rgba(127, 29, 29, 0.3)',
+                      borderRight: '2px solid rgba(255, 255, 255, 0.1)'
+                    }}>
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '12px'
+                      }}>
+                        <span style={{ fontSize: '32px' }}>✏️</span>
+                        <div>
+                          <h2 style={{
+                            margin: 0,
+                            fontSize: '20px',
+                            fontWeight: '700',
+                            color: '#fca5a5',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                          }}>
+                            OLD SCHOOL PROCESS
+                          </h2>
+                          <p style={{
+                            margin: '4px 0 0 0',
+                            fontSize: '13px',
+                            color: '#fca5a5'
+                          }}>
+                            Manual
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div style={{
+                      padding: '24px',
+                      background: 'rgba(20, 83, 45, 0.3)'
+                    }}>
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '12px'
+                      }}>
+                        <span style={{ fontSize: '32px' }}>🤖</span>
+                        <div>
+                          <h2 style={{
+                            margin: 0,
+                            fontSize: '20px',
+                            fontWeight: '700',
+                            color: '#86efac',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                          }}>
+                            AI AIDED PROCESS
+                          </h2>
+                          <p style={{
+                            margin: '4px 0 0 0',
+                            fontSize: '13px',
+                            color: '#86efac'
+                          }}>
+                            Automated
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Comparison Rows */}
+                  {comparisonData.map((item, index) => (
+                    <div
+                      key={item.id}
+                      onClick={() => setSelectedMetric(selectedMetric === item.id ? null : item.id)}
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: '2fr 3fr 3fr',
+                        borderBottom: index < comparisonData.length - 1 ? '2px solid rgba(255, 255, 255, 0.1)' : 'none',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        background: selectedMetric === item.id ? 'rgba(255, 255, 255, 0.05)' : 'transparent'
+                      }}
+                    >
+                      {/* Metric Name */}
+                      <div style={{
+                        padding: '32px 24px',
+                        borderRight: '2px solid rgba(255, 255, 255, 0.1)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '16px'
+                      }}>
+                        <span style={{ fontSize: '36px' }}>{item.icon}</span>
+                        <div>
+                          <h3 style={{
+                            margin: 0,
+                            fontSize: '18px',
+                            fontWeight: '600',
+                            color: 'white',
+                            lineHeight: '1.3'
+                          }}>
+                            {item.metric}
+                          </h3>
+                        </div>
+                      </div>
+
+                      {/* Old School */}
+                      <div style={{
+                        padding: '32px 24px',
+                        background: `linear-gradient(135deg, ${item.oldSchool.color}20 0%, ${item.oldSchool.color}10 100%)`,
+                        borderRight: '2px solid rgba(255, 255, 255, 0.1)'
+                      }}>
+                        <div style={{
+                          fontSize: '56px',
+                          fontWeight: '700',
+                          color: '#fca5a5',
+                          marginBottom: '12px',
+                          lineHeight: '1'
+                        }}>
+                          {item.oldSchool.value}
+                        </div>
+                        <p style={{
+                          margin: '0 0 8px 0',
+                          fontSize: '15px',
+                          fontWeight: '600',
+                          color: '#fca5a5'
+                        }}>
+                          {item.oldSchool.description}
+                        </p>
+                        {selectedMetric === item.id && (
+                          <p style={{
+                            margin: 0,
+                            fontSize: '13px',
+                            color: '#fecaca',
+                            lineHeight: '1.5',
+                            animation: 'fadeIn 0.3s ease'
+                          }}>
+                            {item.oldSchool.details}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* AI Aided */}
+                      <div style={{
+                        padding: '32px 24px',
+                        background: `linear-gradient(135deg, ${item.aiAided.color}20 0%, ${item.aiAided.color}10 100%)`,
+                        position: 'relative'
+                      }}>
+                        <div style={{
+                          fontSize: '56px',
+                          fontWeight: '700',
+                          color: '#86efac',
+                          marginBottom: '12px',
+                          lineHeight: '1'
+                        }}>
+                          {item.aiAided.value}
+                        </div>
+                        <p style={{
+                          margin: '0 0 8px 0',
+                          fontSize: '15px',
+                          fontWeight: '600',
+                          color: '#86efac'
+                        }}>
+                          {item.aiAided.description}
+                        </p>
+                        {selectedMetric === item.id && (
+                          <p style={{
+                            margin: '0 0 12px 0',
+                            fontSize: '13px',
+                            color: '#bbf7d0',
+                            lineHeight: '1.5',
+                            animation: 'fadeIn 0.3s ease'
+                          }}>
+                            {item.aiAided.details}
+                          </p>
+                        )}
+                        <div style={{
+                          display: 'inline-block',
+                          padding: '6px 14px',
+                          background: 'rgba(16, 185, 129, 0.2)',
+                          borderRadius: '20px',
+                          border: '1px solid rgba(16, 185, 129, 0.3)'
+                        }}>
+                          <span style={{
+                            fontSize: '12px',
+                            fontWeight: '600',
+                            color: '#6ee7b7',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px'
+                          }}>
+                            ⚡ {item.aiAided.improvement}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Summary Stats */}
+                <div style={{
+                  marginTop: '50px',
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: '24px'
+                }}>
+                  <div style={{
+                    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%)',
+                    padding: '32px',
+                    borderRadius: '20px',
+                    border: '2px solid rgba(16, 185, 129, 0.3)',
+                    textAlign: 'center'
+                  }}>
+                    <div style={{
+                      fontSize: '64px',
+                      fontWeight: '700',
+                      color: '#10b981',
+                      marginBottom: '12px'
+                    }}>
+                      4x
+                    </div>
+                    <p style={{
+                      margin: 0,
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      color: '#86efac'
+                    }}>
+                      Overall Productivity Increase
+                    </p>
+                  </div>
+
+                  <div style={{
+                    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%)',
+                    padding: '32px',
+                    borderRadius: '20px',
+                    border: '2px solid rgba(16, 185, 129, 0.3)',
+                    textAlign: 'center'
+                  }}>
+                    <div style={{
+                      fontSize: '64px',
+                      fontWeight: '700',
+                      color: '#10b981',
+                      marginBottom: '12px'
+                    }}>
+                      80%
+                    </div>
+                    <p style={{
+                      margin: 0,
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      color: '#86efac'
+                    }}>
+                      Average Time Savings
+                    </p>
+                  </div>
+
+                  <div style={{
+                    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%)',
+                    padding: '32px',
+                    borderRadius: '20px',
+                    border: '2px solid rgba(16, 185, 129, 0.3)',
+                    textAlign: 'center'
+                  }}>
+                    <div style={{
+                      fontSize: '64px',
+                      fontWeight: '700',
+                      color: '#10b981',
+                      marginBottom: '12px'
+                    }}>
+                      95%
+                    </div>
+                    <p style={{
+                      margin: 0,
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      color: '#86efac'
+                    }}>
+                      Faster Design Changes
+                    </p>
+                  </div>
+
+                  <div style={{
+                    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%)',
+                    padding: '32px',
+                    borderRadius: '20px',
+                    border: '2px solid rgba(16, 185, 129, 0.3)',
+                    textAlign: 'center'
+                  }}>
+                    <div style={{
+                      fontSize: '64px',
+                      fontWeight: '700',
+                      color: '#10b981',
+                      marginBottom: '12px'
+                    }}>
+                      83%
+                    </div>
+                    <p style={{
+                      margin: 0,
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      color: '#86efac'
+                    }}>
+                      Reduction in Revision Time
+                    </p>
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div style={{
+                  marginTop: '50px',
+                  textAlign: 'center',
+                  padding: '24px',
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  borderRadius: '16px',
+                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                }}>
+                  <p style={{
+                    color: '#94a3b8',
+                    fontSize: '14px',
+                    margin: 0,
+                    lineHeight: '1.6'
+                  }}>
+                    💡 <strong style={{ color: 'white' }}>Interactive Comparison:</strong> Click on any row to expand and see detailed explanations. Statistics based on industry research, case studies, and real-world implementations.
+                  </p>
+                </div>
+              </div>
+
+              <style>{`
+                @keyframes fadeIn {
+                  from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                  }
+                  to {
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
+                
+                body {
+                  margin: 0;
+                  padding: 0;
+                  overflow-x: hidden;
+                }
+                
+                @media (max-width: 1024px) {
+                  div[style*="gridTemplateColumns: 2fr 3fr 3fr"] {
+                    grid-template-columns: 1fr !important;
+                  }
+                  
+                  div[style*="borderRight"] {
+                    border-right: none !important;
+                    border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+                  }
+                }
+                
+                @media (max-width: 768px) {
+                  h1 {
+                    font-size: 32px !important;
+                  }
+                  
+                  div[style*="fontSize: '56px'"] {
+                    font-size: 48px !important;
+                  }
+                }
+              `}</style>
+            </div>
+          );
+        }
+
+        ReactDOM.render(<ProcessComparison />, document.getElementById('root'));
+    </script>
+</body>
+</html>

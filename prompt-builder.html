@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architectural Keywords - Prompt Builder</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function ArchitecturalKeywords() {
+          const [selectedKeywords, setSelectedKeywords] = useState([]);
+          const [copiedText, setCopiedText] = useState('');
+
+          const categories = [
+            {
+              id: 1,
+              title: "Main Subject",
+              color: "#a8d5e2",
+              sections: [
+                {
+                  name: "Architecture Style",
+                  keywords: [
+                    "Parametric",
+                    "Islamic",
+                    "Brutal",
+                    "Classical",
+                    "Modern",
+                    "Contemporary",
+                    "Minimalist",
+                    "Organic",
+                    "Deconstructivist",
+                    "Gothic",
+                    "Art Deco",
+                    "Bauhaus"
+                  ]
+                },
+                {
+                  name: "Building Type",
+                  keywords: [
+                    "Hotel",
+                    "Residential",
+                    "Commercial",
+                    "Cultural",
+                    "Museum",
+                    "Library",
+                    "Office Tower",
+                    "Mixed-Use",
+                    "Educational",
+                    "Religious",
+                    "Healthcare",
+                    "Sports Facility"
+                  ]
+                }
+              ]
+            },
+            {
+              id: 2,
+              title: "Style & Mood",
+              color: "#ffd4a3",
+              sections: [
+                {
+                  name: "Reference Architects",
+                  keywords: [
+                    "Zaha Hadid",
+                    "Snøhetta",
+                    "Foster + Partners",
+                    "Frank Gehry",
+                    "Bjarke Ingels (BIG)",
+                    "Rem Koolhaas (OMA)",
+                    "Herzog & de Meuron",
+                    "MVRDV",
+                    "Tadao Ando",
+                    "Peter Zumthor",
+                    "Kengo Kuma",
+                    "Steven Holl"
+                  ]
+                },
+                {
+                  name: "Artistic Style",
+                  keywords: [
+                    "Expressionist",
+                    "Cubism",
+                    "Realism",
+                    "Surrealism",
+                    "Futurism",
+                    "Abstract",
+                    "Minimalism",
+                    "Brutalism",
+                    "Organic",
+                    "Industrial",
+                    "Neo-classical",
+                    "Postmodern"
+                  ]
+                }
+              ]
+            },
+            {
+              id: 3,
+              title: "Visual Detailing",
+              color: "#c7b3e5",
+              sections: [
+                {
+                  name: "Image Quality",
+                  keywords: [
+                    "4K",
+                    "8K",
+                    "HD",
+                    "UHD",
+                    "Ultra-realistic",
+                    "Photorealistic",
+                    "High-resolution",
+                    "Cinematic quality",
+                    "Ray-traced",
+                    "Studio quality"
+                  ]
+                },
+                {
+                  name: "Material Blend",
+                  keywords: [
+                    "Feather textures",
+                    "Trees",
+                    "Cotton fabrics",
+                    "Wood grain",
+                    "Stone",
+                    "Glass",
+                    "Concrete",
+                    "Metal",
+                    "Marble",
+                    "Brick",
+                    "Ceramic tiles",
+                    "Green walls",
+                    "Water features"
+                  ]
+                }
+              ]
+            },
+            {
+              id: 4,
+              title: "Camera & Composition",
+              color: "#b4e7ce",
+              sections: [
+                {
+                  name: "Camera Views",
+                  keywords: [
+                    "Top view",
+                    "Front elevation",
+                    "Aerial/Drone",
+                    "Eye-level",
+                    "Render perspective",
+                    "Bird's eye view",
+                    "Worm's eye view",
+                    "Three-quarter view",
+                    "Section cut",
+                    "Interior shot",
+                    "Close-up detail",
+                    "Wide-angle"
+                  ]
+                },
+                {
+                  name: "Composition Rules",
+                  keywords: [
+                    "Rule of thirds",
+                    "Symmetry",
+                    "Dynamic angles",
+                    "Background layering",
+                    "Time of day",
+                    "Golden hour",
+                    "Blue hour",
+                    "Sunset",
+                    "Sunrise",
+                    "Midday",
+                    "Night scene",
+                    "Twilight"
+                  ]
+                }
+              ]
+            },
+            {
+              id: 5,
+              title: "Environment & Context",
+              color: "#ffb4b4",
+              sections: [
+                {
+                  name: "Natural Environment",
+                  keywords: [
+                    "River",
+                    "Lake",
+                    "Beach",
+                    "Mountains",
+                    "Desert",
+                    "Forest",
+                    "Canyon",
+                    "Valley",
+                    "Coastal",
+                    "Hillside",
+                    "Waterfall",
+                    "Garden"
+                  ]
+                },
+                {
+                  name: "Urban Location",
+                  keywords: [
+                    "Egypt",
+                    "Paris",
+                    "Street scene",
+                    "City skyline",
+                    "Historic district",
+                    "New York",
+                    "Tokyo",
+                    "Dubai",
+                    "London",
+                    "Singapore",
+                    "Urban plaza",
+                    "Downtown",
+                    "Waterfront"
+                  ]
+                }
+              ]
+            }
+          ];
+
+          const toggleKeyword = (keyword) => {
+            if (selectedKeywords.includes(keyword)) {
+              setSelectedKeywords(selectedKeywords.filter(k => k !== keyword));
+            } else {
+              setSelectedKeywords([...selectedKeywords, keyword]);
+            }
+          };
+
+          const generatePrompt = () => {
+            if (selectedKeywords.length === 0) return "Click keywords above to build your prompt...";
+            return selectedKeywords.join(", ") + ", architectural visualization, professional render";
+          };
+
+          const copyPrompt = () => {
+            const prompt = generatePrompt();
+            navigator.clipboard.writeText(prompt);
+            setCopiedText('Copied!');
+            setTimeout(() => setCopiedText(''), 2000);
+          };
+
+          const clearAll = () => {
+            setSelectedKeywords([]);
+            setCopiedText('');
+          };
+
+          const isSelected = (keyword) => selectedKeywords.includes(keyword);
+
+          return (
+            <div style={{
+              width: '100%',
+              minHeight: '100vh',
+              background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+              padding: '60px 20px',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+            }}>
+              <div style={{
+                maxWidth: '1400px',
+                margin: '0 auto'
+              }}>
+                {/* Header */}
+                <div style={{
+                  textAlign: 'center',
+                  marginBottom: '40px'
+                }}>
+                  <h1 style={{
+                    color: 'white',
+                    fontSize: '42px',
+                    fontWeight: '700',
+                    margin: '0 0 16px 0'
+                  }}>
+                    Architectural Prompt Builder
+                  </h1>
+                  <p style={{
+                    color: '#b0b0b0',
+                    fontSize: '18px',
+                    margin: 0
+                  }}>
+                    Click keywords to build your Midjourney prompt
+                  </p>
+                </div>
+
+                {/* Prompt Display Box */}
+                <div style={{
+                  background: 'white',
+                  borderRadius: '20px',
+                  padding: '32px',
+                  marginBottom: '40px',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+                }}>
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '16px'
+                  }}>
+                    <h2 style={{
+                      margin: 0,
+                      fontSize: '20px',
+                      fontWeight: '700',
+                      color: '#2c3e50'
+                    }}>
+                      Your Prompt ({selectedKeywords.length} keywords selected)
+                    </h2>
+                    <div style={{ display: 'flex', gap: '12px' }}>
+                      {selectedKeywords.length > 0 && (
+                        <button
+                          onClick={clearAll}
+                          style={{
+                            padding: '10px 20px',
+                            background: '#e74c3c',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '8px',
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            cursor: 'pointer',
+                            transition: 'all 0.2s ease'
+                          }}
+                          onMouseEnter={(e) => e.target.style.background = '#c0392b'}
+                          onMouseLeave={(e) => e.target.style.background = '#e74c3c'}
+                        >
+                          Clear All
+                        </button>
+                      )}
+                      <button
+                        onClick={copyPrompt}
+                        disabled={selectedKeywords.length === 0}
+                        style={{
+                          padding: '10px 20px',
+                          background: selectedKeywords.length === 0 ? '#95a5a6' : '#667eea',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '8px',
+                          fontSize: '14px',
+                          fontWeight: '600',
+                          cursor: selectedKeywords.length === 0 ? 'not-allowed' : 'pointer',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          if (selectedKeywords.length > 0) e.target.style.background = '#5568d3';
+                        }}
+                        onMouseLeave={(e) => {
+                          if (selectedKeywords.length > 0) e.target.style.background = '#667eea';
+                        }}
+                      >
+                        {copiedText || 'Copy Prompt'}
+                      </button>
+                    </div>
+                  </div>
+                  <div style={{
+                    background: '#f8f9fa',
+                    padding: '20px',
+                    borderRadius: '12px',
+                    minHeight: '80px',
+                    border: '2px dashed #dee2e6'
+                  }}>
+                    <p style={{
+                      margin: 0,
+                      color: selectedKeywords.length === 0 ? '#95a5a6' : '#2c3e50',
+                      fontSize: '16px',
+                      lineHeight: '1.7',
+                      fontStyle: selectedKeywords.length === 0 ? 'italic' : 'normal'
+                    }}>
+                      {generatePrompt()}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Categories Grid */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+                  gap: '30px'
+                }}>
+                  {categories.map((category) => (
+                    <div key={category.id} style={{
+                      background: 'white',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      boxShadow: '0 8px 32px rgba(0,0,0,0.2)'
+                    }}>
+                      {/* Category Header */}
+                      <div style={{
+                        background: category.color,
+                        padding: '24px',
+                        borderBottom: `4px solid ${category.color}`,
+                        filter: 'brightness(0.95)'
+                      }}>
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '12px'
+                        }}>
+                          <div style={{
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '50%',
+                            background: 'white',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '20px',
+                            fontWeight: '700',
+                            color: '#2c3e50'
+                          }}>
+                            {category.id}
+                          </div>
+                          <h2 style={{
+                            margin: 0,
+                            fontSize: '24px',
+                            fontWeight: '700',
+                            color: '#2c3e50'
+                          }}>
+                            {category.title}
+                          </h2>
+                        </div>
+                      </div>
+
+                      {/* Sections */}
+                      <div style={{ padding: '24px' }}>
+                        {category.sections.map((section, sectionIdx) => (
+                          <div key={sectionIdx} style={{
+                            marginBottom: sectionIdx < category.sections.length - 1 ? '28px' : '0'
+                          }}>
+                            <h3 style={{
+                              margin: '0 0 16px 0',
+                              fontSize: '16px',
+                              fontWeight: '600',
+                              color: '#2c3e50',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.5px'
+                            }}>
+                              {section.name}
+                            </h3>
+                            <div style={{
+                              display: 'flex',
+                              flexWrap: 'wrap',
+                              gap: '8px'
+                            }}>
+                              {section.keywords.map((keyword, keywordIdx) => (
+                                <span
+                                  key={keywordIdx}
+                                  onClick={() => toggleKeyword(keyword)}
+                                  style={{
+                                    padding: '8px 16px',
+                                    background: isSelected(keyword) ? category.color : category.color + '20',
+                                    color: '#2c3e50',
+                                    borderRadius: '20px',
+                                    fontSize: '13px',
+                                    fontWeight: isSelected(keyword) ? '600' : '500',
+                                    border: isSelected(keyword) ? `2px solid ${category.color}` : `1px solid ${category.color}40`,
+                                    transition: 'all 0.2s ease',
+                                    cursor: 'pointer',
+                                    boxShadow: isSelected(keyword) ? `0 4px 12px ${category.color}60` : 'none',
+                                    transform: isSelected(keyword) ? 'scale(1.05)' : 'scale(1)'
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    if (!isSelected(keyword)) {
+                                      e.target.style.background = category.color + '40';
+                                      e.target.style.transform = 'translateY(-2px)';
+                                    }
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    if (!isSelected(keyword)) {
+                                      e.target.style.background = category.color + '20';
+                                      e.target.style.transform = 'translateY(0)';
+                                    }
+                                  }}
+                                >
+                                  {isSelected(keyword) ? '✓ ' : ''}{keyword}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Footer Note */}
+                <div style={{
+                  marginTop: '60px',
+                  textAlign: 'center',
+                  padding: '32px',
+                  background: 'rgba(255,255,255,0.05)',
+                  borderRadius: '16px',
+                  border: '1px solid rgba(255,255,255,0.1)'
+                }}>
+                  <p style={{
+                    color: '#b0b0b0',
+                    fontSize: '15px',
+                    lineHeight: '1.7',
+                    margin: 0
+                  }}>
+                    💡 <strong style={{ color: 'white' }}>Pro Tip:</strong> Select 3-7 keywords from different categories for best results. Click any keyword to add it to your prompt, click again to remove it.
+                  </p>
+                </div>
+              </div>
+
+              <style>{`
+                body {
+                  margin: 0;
+                  padding: 0;
+                }
+                
+                @media (max-width: 768px) {
+                  h1 {
+                    font-size: 32px !important;
+                  }
+                  
+                  div[style*="gridTemplateColumns"] {
+                    grid-template-columns: 1fr !important;
+                  }
+                }
+              `}</style>
+            </div>
+          );
+        }
+
+        ReactDOM.render(<ArchitecturalKeywords />, document.getElementById('root'));
+    </script>
+</body>
+</html>
