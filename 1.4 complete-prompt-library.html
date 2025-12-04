@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Architectural Prompt Library</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function CompletePromptLibrary() {
+          const [searchTerm, setSearchTerm] = useState('');
+          const [activeTab, setActiveTab] = useState('interior');
+          const [selectedPrompt, setSelectedPrompt] = useState(null);
+          const [copiedText, setCopiedText] = useState('');
+
+          const interiorData = [
+            { id: 1, subject: "Double-height Luxury Living Room", style: "Zaha Hadid-inspired Parametric Fluidity", details: "White marble, curved glass, velvet textures, 8K render", camera: "Wide-angle lens, low angle, symmetrical composition", environment: "Sunset over a futuristic city skyline" },
+            { id: 2, subject: "Sunken Conversation Pit", style: "Mid-Century Modern (Eames style)", details: "Teak wood, orange leather, shag rug, photorealistic", camera: "Eye-level, rule of thirds, depth of field on foreground", environment: "Golden hour light filtering through floor-to-ceiling windows" },
+            { id: 3, subject: "Minimalist Spa Bathroom", style: "Japandi (Japanese + Scandi)", details: "Rough stone, bamboo, steam mist, soft shadows", camera: "Overhead (top-down) view, geometric alignment", environment: "Zen garden visible through a circular window" },
+            { id: 4, subject: "Industrial Loft Kitchen", style: "Bauhaus / Brutalist", details: "Exposed concrete, matte black steel, reclaimed brick", camera: "Isometric view, sharp focus, dynamic angles", environment: "Rainy urban street at night (Blade Runner vibe)" },
+            { id: 5, subject: "Grand Palace Library", style: "Dark Academia / Victorian", details: "Mahogany wood, brass accents, dust motes in light beams", camera: "Cinematic shot, slow shutter blur effect, leading lines", environment: "Stormy afternoon, dim natural light" },
+            { id: 6, subject: "Futuristic Bedroom Pod", style: "Cyberpunk / Neon Noir", details: "Chromatic metal, LED strips, translucent plastic, Unreal Engine 5", camera: "Fish-eye lens, immersive perspective", environment: "High-rise view of a neon-lit Tokyo cyberpunk city" },
+            { id: 7, subject: "Bohemian Artist Studio", style: "Eclectic / Maximalist", details: "Layered fabrics, rattan, vibrant oil paints, cluttercore details", camera: "Macro shot (close-up), focus on textures", environment: "Bright sunny morning with indoor plants casting shadows" },
+            { id: 8, subject: "Neo-Classical Hotel Lobby", style: "Wes Anderson / Art Deco", details: "Pastel color palette, gold leaf, symmetry, velvet upholstery", camera: "Front elevation (perfectly flat), symmetrical framing", environment: "Snowy mountains visible through grand arch doors" },
+            { id: 9, subject: "Organic Cave Dwelling", style: "Biophilic / Earthship", details: "Rammed earth, raw clay, natural linen, cozy warm lighting", camera: "Eye-level, framing through an archway", environment: "Desert landscape at dusk with stars appearing" },
+            { id: 10, subject: "High-Tech Home Office", style: "Apple Aesthetic / Ultra-Clean", details: "Anodized aluminum, gloss white, glass desk, 8K crispness", camera: "35mm portrait lens, bokeh background", environment: "Overlooking a calm, misty lake at dawn" },
+            { id: 11, subject: "Rustic Farmhouse Kitchen", style: "French Country / Wabi-Sabi", details: "Chipped plaster, copper pots, dried herbs, warm grain", camera: "50mm lens, candid lifestyle angle", environment: "Autumn afternoon, golden light hitting a harvest table" },
+            { id: 12, subject: "Avant-Garde Fashion Boutique", style: "Deconstructivism (Frank Gehry style)", details: "Mirrored surfaces, twisted metal, neon tube lighting", camera: "Dutch angle (tilted), dynamic motion blur", environment: "Busy street scene, passing silhouettes of people" },
+            { id: 13, subject: "Glass Penthouse Staircase", style: "Ultra-Modern Luxury", details: "Floating glass steps, invisible railings, polished travertine", camera: "Looking up from bottom (Worm's eye view)", environment: "Deep blue twilight sky through a skylight" },
+            { id: 14, subject: "Tropical Resort Bedroom", style: "Balinese / Tropical Modernism", details: "Dark teak, mosquito netting, white linens, airy atmosphere", camera: "Wide panoramic shot, open composition", environment: "Lush jungle rain, wet leaves, green ambient light" },
+            { id: 15, subject: "Steampunk Clockwork Study", style: "Retro-Futurism / Industrial", details: "Brass gears, leather armchairs, steam pipes, intricate details", camera: "Close-up on desk details, macro depth of field", environment: "Foggy London streetlamp glow outside" },
+            { id: 16, subject: "Mediterranean Courtyard (Indoor)", style: "Greek / Cycladic", details: "White-washed walls, terracotta tiles, bougainvillea flowers", camera: "Drone view (looking down into the courtyard)", environment: "Bright high-noon sun, harsh artistic shadows" },
+            { id: 17, subject: "Kids' Playroom", style: "Memphis Design / Pop Art", details: "Primary colors, geometric shapes, soft plastic textures", camera: "Eye-level (child's perspective), wide aperture", environment: "Bright artificial studio lighting, playful atmosphere" },
+            { id: 18, subject: "Underground Wine Cellar", style: "Gothic Revival", details: "Ancient stone arches, candle wax, dusty bottles, chiaroscuro", camera: "Long hallway shot, leading lines into darkness", environment: "Subterranean, no windows, lit by candlelight only" },
+            { id: 19, subject: "Meditation Yoga Studio", style: "Minimalist / Tadao Ando Concrete", details: "Smooth concrete, water reflection, light slits, serene", camera: "Symmetrical, wide shot, vast empty space", environment: "Light projecting a cross shape on the wall (Church of Light style)" },
+            { id: 20, subject: "Luxury Yacht Saloon", style: "Nautical / Contemporary", details: "High-gloss wood, cream leather, curved cabinetry, chrome", camera: "Eye-level, looking out toward the horizon", environment: "Open ocean, turquoise water, bright blue sky" }
+          ];
+
+          const arabicData = [
+            { id: 1, subject: "Grand Double-Height Majlis", style: "Modern Qatari Luxury (Msheireb style)", details: "Travertine walls, backlit onyx, minimal gold lines, plush cream seating", camera: "Wide-angle, low perspective, symmetrical alignment", environment: "Doha skyline view at twilight through floor-to-ceiling glass" },
+            { id: 2, subject: "Traditional Open Courtyard (Sahn)", style: "Najdi Heritage (Central Saudi)", details: "Mud-brick texture, triangular \"Shurfat\" openings, tamarisk wood doors", camera: "Drone view (top-down), looking into the open square", environment: "Bright midday desert sun casting sharp geometric shadows" },
+            { id: 3, subject: "Bedouin Tent Lounge", style: "Luxury Glamping / Boho-Islamic", details: "Red & black Sadu weaving patterns, low floor cushions, brass lanterns", camera: "Eye-level, immersive, depth of field on foreground coffee pot (Dallah)", environment: "Endless red sand dunes of the Empty Quarter at sunset" },
+            { id: 4, subject: "High-Tech Penthouse Living Room", style: "Futurism / Neom (The Line)", details: "Digital kinetic Mashrabiya screens, sleek white gloss, holographic art", camera: "Cinematic wide shot, dynamic angle", environment: "Futuristic vertical city exterior with flying taxis" },
+            { id: 5, subject: "Islamic Spa & Hammam", style: "Andalusian / Moorish Revival", details: "Zellige tilework, domed ceiling with star vents, steam atmosphere", camera: "Low angle, water surface reflection", environment: "Secluded oasis garden visible through arched doorway" },
+            { id: 6, subject: "Private Villa Entrance Hall", style: "Contemporary Emirati", details: "Polished limestone, monumental wooden door, calligraphy art sculpture", camera: "One-point perspective, leading lines toward the center", environment: "Palm tree shadows cast against a pristine white exterior wall" },
+            { id: 7, subject: "Modern Desert Kitchen", style: "Earthy Minimalist (Raw architecture)", details: "Rammed earth walls, matte black fixtures, rough-hewn timber table", camera: "Isometric view, sharp focus", environment: "Rocky desert canyon landscape outside (Al Ula vibe)" },
+            { id: 8, subject: "Library & Study", style: "Golden Islamic Age / Scholarly", details: "Dark walnut wood, intricate mother-of-pearl inlay, antique astrolabes", camera: "Close-up macro, focus on dust motes and textures", environment: "Soft light filtering through a wooden Mashrabiya screen" },
+            { id: 9, subject: "Hotel Lobby Atrium", style: "Dubai Opulence / Art Deco Fusion", details: "Crystal chandeliers, velvet drapes in royal blue, gold leaf columns", camera: "Fisheye lens, looking straight up at the dome", environment: "Bustling downtown Dubai street scene at night" },
+            { id: 10, subject: "Women's Private Lounge", style: "Soft Pastel / Feminine Arabesque", details: "Rose-gold metal screens, silk cushions, blush pink marble", camera: "Eye-level, soft focus, airy and bright composition", environment: "Private walled garden with jasmine flowers" },
+            { id: 11, subject: "Traditional Bedroom", style: "Old Doha Heritage", details: "Mangrove wood beams (Danchal), woven palm mats, stained glass accents", camera: "35mm portrait lens, cozy and intimate", environment: "Narrow alleyway (Sikka) visible through a small window" },
+            { id: 12, subject: "Executive Office", style: "Modern Islamic Corporate", details: "Geometric glass partitions, Kufic calligraphy wall decal, leather desk", camera: "Over-the-shoulder view, professional framing", environment: "View of the Burj Khalifa and Sheikh Zayed Road" },
+            { id: 13, subject: "Sunken Fire Pit Seating", style: "Desert Resort Modernism", details: "Beige concrete, fire glow, neutral linen fabrics, water feature", camera: "Wide panoramic shot, rule of thirds", environment: "Starry night sky in the deep desert (no light pollution)" },
+            { id: 14, subject: "Prayer Room (Musalla)", style: "Zen / Spiritual Minimalism", details: "Pure white space, indirect cove lighting, soft prayer rug textures", camera: "Symmetrical, centered composition, peaceful stillness", environment: "View of a calm infinity pool merging with the sea" },
+            { id: 15, subject: "Dining Banquet Hall", style: "Levantine / Damascene", details: "Fountain in center, striped stone masonry (Ablaq), jasmine vines", camera: "High angle, capturing the table layout and feast", environment: "Sunny afternoon with light rays piercing through vines" },
+            { id: 16, subject: "Boutique Perfume Shop", style: "Omani Heritage / Incense", details: "Frankincense smoke, dark shelving, amber glass bottles, copper bowls", camera: "Macro shot, depth of field blurring the background", environment: "Old Souq marketplace background with warm lanterns" },
+            { id: 17, subject: "Coastal Villa Living Room", style: "Kuwaiti Modern / Nautical", details: "Bleached wood, pearl-white textures, blue ceramic accents, airy", camera: "Eye-level, looking out towards the patio", environment: "Arabian Gulf seascape with a traditional Dhow boat" },
+            { id: 18, subject: "Art Gallery Corridor", style: "Brutalist / Cultural Foundation", details: "Exposed concrete, spotlighting on art, sharp shadow contrast", camera: "Long corridor shot, leading lines, high contrast", environment: "Stark midday sun creating \"rain of light\" effect (Louvre Abu Dhabi style)" },
+            { id: 19, subject: "Rooftop Shisha Lounge", style: "Urban Chic / Nightlife", details: "Neon arabic calligraphy, low sofas, lush greenery, ambient purple light", camera: "Handheld style, slight motion blur for energy", environment: "Glittering city lights of Riyadh financial district" },
+            { id: 20, subject: "Indoor Swimming Pool", style: "Ottoman / Turkish Luxury", details: "Iznik blue tiles, marble pillars, vaulted ceiling, calm water", camera: "Low angle, split shot (half underwater, half above)", environment: "Hazy steam room atmosphere with soft diffused light" }
+          ];
+
+          const artisticData = [
+            { id: 1, subject: "Chocolate Melting Facade", style: "Surrealist / Edible Architecture", details: "Glossy brown dripping texture, cocoa dust particles, sweet atmosphere", camera: "Close-up macro, shallow depth of field", environment: "Golden afternoon light making it glisten" },
+            { id: 2, subject: "Snake Skin Tessellated Building", style: "Biomimicry / Reptilian", details: "Diamond-scale patterns, iridescent green-gold, 8K texture detail", camera: "Aerial drone, top-down geometric pattern", environment: "Desert landscape, heat shimmer effect" },
+            { id: 3, subject: "Liquid Mercury Tower", style: "Fluid Dynamics / Reflective", details: "Chrome liquid surface, constantly shifting, mirror-like reflections", camera: "Wide-angle, dynamic perspective", environment: "Futuristic cityscape reflected in surface" },
+            { id: 4, subject: "Coral Reef Apartment Complex", style: "Underwater Organic / Marine Bio", details: "Pink-orange coral textures, porous surfaces, aquatic atmosphere", camera: "Eye-level, immersive, blue-green lighting", environment: "Submerged in clear tropical ocean water" },
+            { id: 5, subject: "Crystallized Ice Palace", style: "Frozen / Prismatic", details: "Transparent ice crystals, refracted rainbow light, frost patterns", camera: "Low angle looking up, light rays through ice", environment: "Arctic tundra, aurora borealis in sky" },
+            { id: 6, subject: "Origami Folded Museum", style: "Paper Art / Angular", details: "White paper texture, sharp creases, geometric folds, minimalist", camera: "Isometric view, crisp edges", environment: "Pure white background, studio lighting" },
+            { id: 7, subject: "Living Moss-Covered Tower", style: "Vertical Garden / Bio-Architecture", details: "Thick green moss, dripping water, humid atmosphere, living texture", camera: "Close-up detail, water droplets in focus", environment: "Rainforest canopy, misty morning light" },
+            { id: 8, subject: "Shattered Glass Pavilion", style: "Deconstructed / Fragmented", details: "Broken glass shards, sharp edges, transparent fragments suspended", camera: "Through the shards, fractured perspective", environment: "Sunset light creating rainbow prisms" },
+            { id: 9, subject: "Honeycomb Hexagonal Library", style: "Bee-Inspired / Geometric Nature", details: "Golden wax texture, hexagonal cells, warm amber glow", camera: "Straight-on, pattern-focused, symmetrical", environment: "Soft warm interior lighting, cozy atmosphere" },
+            { id: 10, subject: "Smoke and Cloud Building", style: "Ephemeral / Atmospheric", details: "Billowing white smoke, soft edges, translucent, dreamlike", camera: "Soft focus, ethereal composition", environment: "Floating in pale blue sky, heavenly light" },
+            { id: 11, subject: "Rusty Metal Decay Museum", style: "Industrial Ruin / Weathered", details: "Oxidized iron, rust textures, patina, corroded surfaces", camera: "Macro detail, texture focus", environment: "Abandoned industrial zone, overcast day" },
+            { id: 12, subject: "Fabric Draped Opera House", style: "Textile Architecture / Soft", details: "Flowing silk fabric, rippling waves, soft folds, luxurious texture", camera: "Wind-blown motion, long exposure blur", environment: "Dramatic stage lighting, deep shadows" },
+            { id: 13, subject: "Circuit Board Skyscraper", style: "Tech / Microchip Inspired", details: "Green PCB texture, golden circuit traces, LED lights, futuristic", camera: "Extreme close-up, neon glow", environment: "Dark night, glowing from within" },
+            { id: 14, subject: "Tree Bark Facade Villa", style: "Natural Texture / Organic", details: "Rough bark texture, wood grain, knots and cracks, earthy", camera: "Eye-level, tactile detail", environment: "Forest setting, dappled sunlight" },
+            { id: 15, subject: "Balloon Inflated Pavilion", style: "Pneumatic / Playful", details: "Translucent rubber, inflated rounded forms, pastel colors", camera: "Fish-eye lens, immersive bubble view", environment: "Bright daylight, shadows inside translucent walls" },
+            { id: 16, subject: "Fossilized Bone Structure", style: "Paleontology / Ancient", details: "Weathered bone texture, ivory white, porous surface, aged", camera: "Archaeological perspective, detailed texture", environment: "Museum display, spotlit against darkness" },
+            { id: 17, subject: "Stained Glass Cathedral Modern", style: "Kaleidoscopic / Light Art", details: "Vibrant colored glass, light transmission, geometric patterns", camera: "Interior shot, colored light streaming through", environment: "Midday sun, rainbow light pools on floor" },
+            { id: 18, subject: "Sand Dune Organic Museum", style: "Erosion-Inspired / Fluid", details: "Smooth sand-blown curves, beige gradient, windswept texture", camera: "Drone aerial, sweeping curves visible", environment: "Desert at golden hour, long shadows" },
+            { id: 19, subject: "Feather Light Tower", style: "Avian / Delicate", details: "White feather texture, soft downy edges, ultra-light appearance", camera: "Backlit, translucent glow", environment: "Floating in clouds, soft diffused light" },
+            { id: 20, subject: "Lava Flow Auditorium", style: "Volcanic / Molten", details: "Glowing red-orange magma, cracked black crust, heat shimmer", camera: "Wide cinematic, dramatic lighting", environment: "Volcanic landscape, smoke and ash in air" }
+          ];
+
+          const getCurrentData = () => {
+            switch(activeTab) {
+              case 'interior': return interiorData;
+              case 'arabic': return arabicData;
+              case 'artistic': return artisticData;
+              default: return interiorData;
+            }
+          };
+
+          const filteredData = getCurrentData().filter(item =>
+            Object.values(item).some(val =>
+              val.toString().toLowerCase().includes(searchTerm.toLowerCase())
+            )
+          );
+
+          const generatePrompt = (item) => {
+            return `${item.subject}, ${item.style}, ${item.details}, ${item.camera}, ${item.environment}, architectural visualization, professional render`;
+          };
+
+          const copyPrompt = (item) => {
+            const prompt = generatePrompt(item);
+            navigator.clipboard.writeText(prompt);
+            setSelectedPrompt(item.id);
+            setCopiedText('Copied!');
+            setTimeout(() => {
+              setCopiedText('');
+              setSelectedPrompt(null);
+            }, 2000);
+          };
+
+          const tabColors = {
+            interior: { gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', solid: '#667eea' },
+            arabic: { gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', solid: '#f5576c' },
+            artistic: { gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', solid: '#4facfe' }
+          };
+
+          const categoryColors = {
+            subject: "#a8d5e2",
+            style: "#ffd4a3",
+            details: "#c7b3e5",
+            camera: "#b4e7ce",
+            environment: "#ffb4b4"
+          };
+
+          return (
+            <div style={{
+              width: '100%',
+              minHeight: '100vh',
+              background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+              padding: '60px 20px',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+            }}>
+              <div style={{
+                maxWidth: '1600px',
+                margin: '0 auto'
+              }}>
+                {/* Header */}
+                <div style={{
+                  textAlign: 'center',
+                  marginBottom: '40px'
+                }}>
+                  <h1 style={{
+                    color: 'white',
+                    fontSize: '42px',
+                    fontWeight: '700',
+                    margin: '0 0 16px 0'
+                  }}>
+                    Complete Architectural Prompt Library
+                  </h1>
+                  <p style={{
+                    color: '#b0b0b0',
+                    fontSize: '18px',
+                    margin: '0 0 30px 0'
+                  }}>
+                    60 curated prompts across 3 categories - Click any row to copy the full prompt
+                  </p>
+
+                  {/* Tabs */}
+                  <div style={{
+                    display: 'flex',
+                    gap: '12px',
+                    justifyContent: 'center',
+                    marginBottom: '30px',
+                    flexWrap: 'wrap'
+                  }}>
+                    <button
+                      onClick={() => setActiveTab('interior')}
+                      style={{
+                        padding: '14px 32px',
+                        background: activeTab === 'interior' ? tabColors.interior.gradient : '#3a3a3a',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '50px',
+                        fontSize: '16px',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        boxShadow: activeTab === 'interior' ? '0 4px 20px rgba(102, 126, 234, 0.4)' : 'none'
+                      }}
+                    >
+                      Interior Design (20)
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('arabic')}
+                      style={{
+                        padding: '14px 32px',
+                        background: activeTab === 'arabic' ? tabColors.arabic.gradient : '#3a3a3a',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '50px',
+                        fontSize: '16px',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        boxShadow: activeTab === 'arabic' ? '0 4px 20px rgba(245, 87, 108, 0.4)' : 'none'
+                      }}
+                    >
+                      Arabic Style (20)
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('artistic')}
+                      style={{
+                        padding: '14px 32px',
+                        background: activeTab === 'artistic' ? tabColors.artistic.gradient : '#3a3a3a',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '50px',
+                        fontSize: '16px',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        boxShadow: activeTab === 'artistic' ? '0 4px 20px rgba(79, 172, 254, 0.4)' : 'none'
+                      }}
+                    >
+                      Artistic & Unconventional (20)
+                    </button>
+                  </div>
+
+                  {/* Search Bar */}
+                  <div style={{
+                    maxWidth: '600px',
+                    margin: '0 auto'
+                  }}>
+                    <input
+                      type="text"
+                      placeholder="Search by keyword, style, or material..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '16px 24px',
+                        fontSize: '16px',
+                        borderRadius: '50px',
+                        border: `2px solid ${tabColors[activeTab].solid}`,
+                        background: '#2a2a2a',
+                        color: 'white',
+                        outline: 'none',
+                        transition: 'all 0.3s ease'
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Table Container */}
+                <div style={{
+                  background: 'white',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                  boxShadow: '0 10px 50px rgba(0,0,0,0.3)'
+                }}>
+                  <div style={{
+                    overflowX: 'auto'
+                  }}>
+                    <table style={{
+                      width: '100%',
+                      borderCollapse: 'collapse'
+                    }}>
+                      <thead>
+                        <tr style={{
+                          background: tabColors[activeTab].gradient
+                        }}>
+                          <th style={{
+                            padding: '20px',
+                            textAlign: 'left',
+                            color: 'white',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            width: '50px'
+                          }}>#</th>
+                          <th style={{
+                            padding: '20px',
+                            textAlign: 'left',
+                            color: 'white',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            minWidth: '200px'
+                          }}>Main Subject</th>
+                          <th style={{
+                            padding: '20px',
+                            textAlign: 'left',
+                            color: 'white',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            minWidth: '200px'
+                          }}>Style & Mood</th>
+                          <th style={{
+                            padding: '20px',
+                            textAlign: 'left',
+                            color: 'white',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            minWidth: '250px'
+                          }}>Visual Detailing</th>
+                          <th style={{
+                            padding: '20px',
+                            textAlign: 'left',
+                            color: 'white',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            minWidth: '200px'
+                          }}>Camera & Composition</th>
+                          <th style={{
+                            padding: '20px',
+                            textAlign: 'left',
+                            color: 'white',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            minWidth: '200px'
+                          }}>Environment & Context</th>
+                          <th style={{
+                            padding: '20px',
+                            textAlign: 'center',
+                            color: 'white',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            width: '100px'
+                          }}>Copy</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredData.map((item, index) => (
+                          <tr
+                            key={item.id}
+                            style={{
+                              background: index % 2 === 0 ? '#fafafa' : 'white',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s ease',
+                              borderLeft: selectedPrompt === item.id ? `5px solid ${tabColors[activeTab].solid}` : '5px solid transparent'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = '#f0f0f0';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = index % 2 === 0 ? '#fafafa' : 'white';
+                            }}
+                          >
+                            <td style={{
+                              padding: '20px',
+                              color: tabColors[activeTab].solid,
+                              fontWeight: '700',
+                              fontSize: '16px'
+                            }}>
+                              {item.id}
+                            </td>
+                            <td style={{
+                              padding: '20px',
+                              color: '#2c3e50',
+                              fontSize: '14px',
+                              fontWeight: '600',
+                              lineHeight: '1.5'
+                            }}>
+                              <div style={{
+                                display: 'inline-block',
+                                padding: '4px 0',
+                                borderLeft: `4px solid ${categoryColors.subject}`,
+                                paddingLeft: '12px'
+                              }}>
+                                {item.subject}
+                              </div>
+                            </td>
+                            <td style={{
+                              padding: '20px',
+                              color: '#5a6c7d',
+                              fontSize: '13px',
+                              lineHeight: '1.6'
+                            }}>
+                              <div style={{
+                                background: categoryColors.style + '20',
+                                padding: '8px 12px',
+                                borderRadius: '8px',
+                                border: `1px solid ${categoryColors.style}40`
+                              }}>
+                                {item.style}
+                              </div>
+                            </td>
+                            <td style={{
+                              padding: '20px',
+                              color: '#5a6c7d',
+                              fontSize: '13px',
+                              lineHeight: '1.6'
+                            }}>
+                              <div style={{
+                                background: categoryColors.details + '20',
+                                padding: '8px 12px',
+                                borderRadius: '8px',
+                                border: `1px solid ${categoryColors.details}40`
+                              }}>
+                                {item.details}
+                              </div>
+                            </td>
+                            <td style={{
+                              padding: '20px',
+                              color: '#5a6c7d',
+                              fontSize: '13px',
+                              lineHeight: '1.6'
+                            }}>
+                              <div style={{
+                                background: categoryColors.camera + '20',
+                                padding: '8px 12px',
+                                borderRadius: '8px',
+                                border: `1px solid ${categoryColors.camera}40`
+                              }}>
+                                {item.camera}
+                              </div>
+                            </td>
+                            <td style={{
+                              padding: '20px',
+                              color: '#5a6c7d',
+                              fontSize: '13px',
+                              lineHeight: '1.6'
+                            }}>
+                              <div style={{
+                                background: categoryColors.environment + '20',
+                                padding: '8px 12px',
+                                borderRadius: '8px',
+                                border: `1px solid ${categoryColors.environment}40`
+                              }}>
+                                {item.environment}
+                              </div>
+                            </td>
+                            <td style={{
+                              padding: '20px',
+                              textAlign: 'center'
+                            }}>
+                              <button
+                                onClick={() => copyPrompt(item)}
+                                style={{
+                                  padding: '8px 16px',
+                                  background: selectedPrompt === item.id ? '#27ae60' : tabColors[activeTab].solid,
+                                  color: 'white',
+                                  border: 'none',
+                                  borderRadius: '8px',
+                                  fontSize: '13px',
+                                  fontWeight: '600',
+                                  cursor: 'pointer',
+                                  transition: 'all 0.2s ease',
+                                  whiteSpace: 'nowrap'
+                                }}
+                              >
+                                {selectedPrompt === item.id ? '✓ Copied' : 'Copy'}
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div style={{
+                  marginTop: '40px',
+                  textAlign: 'center',
+                  padding: '24px',
+                  background: 'rgba(255,255,255,0.05)',
+                  borderRadius: '16px',
+                  border: '1px solid rgba(255,255,255,0.1)'
+                }}>
+                  <p style={{
+                    color: '#b0b0b0',
+                    fontSize: '14px',
+                    margin: 0
+                  }}>
+                    💡 <strong style={{ color: 'white' }}>Tip:</strong> Click the "Copy" button on any row to copy the complete Midjourney prompt to your clipboard. Switch between tabs to explore different architectural styles.
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        }
+
+        ReactDOM.render(<CompletePromptLibrary />, document.getElementById('root'));
+    </script>
+</body>
+</html>

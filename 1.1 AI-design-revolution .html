@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The AI-Powered Design Revolution</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function AIDesignRevolution() {
+          const [expandedSection, setExpandedSection] = useState(null);
+          const [selectedTool, setSelectedTool] = useState(null);
+
+          const toggleSection = (section) => {
+            setExpandedSection(expandedSection === section ? null : section);
+          };
+
+          const phase1Sections = [
+            {
+              id: 'ideation',
+              title: 'Supercharge Ideation with AI',
+              icon: '💡',
+              description: 'AI generates vast volumes and diverse styles of design concepts in seconds.',
+              features: [
+                'Generate multiple design variations instantly',
+                'Explore different architectural styles',
+                'Rapid concept iteration',
+                'Visual brainstorming at scale'
+              ]
+            },
+            {
+              id: 'prompts',
+              title: 'Craft Ideas with Simple Text Prompts',
+              icon: '✍️',
+              description: 'Define a subject, style, and visual details to generate high-fidelity concepts.',
+              features: [
+                'Natural language input',
+                'Precise style control',
+                'Material specification',
+                'Mood and atmosphere definition'
+              ]
+            },
+            {
+              id: 'creative',
+              title: 'Unlock New Creative Avenues',
+              icon: '🌿',
+              description: 'Use AI to explore novel concepts like sustainable furniture or designs inspired by nature (biomimicry).',
+              features: [
+                'Biomimicry exploration',
+                'Sustainable design concepts',
+                'Experimental materials',
+                'Nature-inspired forms'
+              ]
+            }
+          ];
+
+          const phase2Sections = [
+            {
+              id: 'floor-plans',
+              title: 'Intelligent Floor Plan Generation',
+              icon: '📐',
+              description: 'Generate optimized floor plans from requirements and constraints using AI algorithms.',
+              features: [
+                'Automatic room layout optimization',
+                'Building code compliance checking',
+                'Multiple layout alternatives',
+                'Circulation flow analysis',
+                'Area calculations and reports'
+              ]
+            },
+            {
+              id: 'space-planning',
+              title: 'AI-Powered Space Planning',
+              icon: '📏',
+              description: 'Optimize spatial arrangements based on function, flow, and user requirements.',
+              features: [
+                'Furniture placement suggestions',
+                'Ergonomic space analysis',
+                'Traffic flow optimization',
+                'Zoning and functional separation',
+                'Accessibility compliance'
+              ]
+            },
+            {
+              id: 'technical',
+              title: 'Technical Documentation',
+              icon: '📋',
+              description: 'Generate construction documents, schedules, and specifications automatically.',
+              features: [
+                'Auto-generate material schedules',
+                'Dimension and annotation assistance',
+                'Detail library suggestions',
+                'Specification writing support',
+                'BIM integration'
+              ]
+            },
+            {
+              id: 'iterations',
+              title: 'Design Iteration & Optimization',
+              icon: '🔄',
+              description: 'Rapidly test design alternatives and optimize for performance criteria.',
+              features: [
+                'Parametric variations',
+                'Energy performance analysis',
+                'Cost estimation',
+                'Structural feasibility checks',
+                'Multi-objective optimization'
+              ]
+            },
+            {
+              id: 'collaboration',
+              title: 'Smart Collaboration Tools',
+              icon: '👥',
+              description: 'AI-assisted coordination between different design disciplines.',
+              features: [
+                'Clash detection',
+                'Design consistency checking',
+                'Automated coordination',
+                'Version control intelligence',
+                'Team communication insights'
+              ]
+            }
+          ];
+
+          const phase3Sections = [
+            {
+              id: 'editing',
+              title: 'Edit Real Spaces Instantly',
+              icon: '🎨',
+              description: 'Add/remove objects, change materials, and adjust lighting on existing photos or renders.',
+              features: [
+                'Object manipulation',
+                'Material swapping',
+                'Lighting adjustment',
+                'Real-time visualization'
+              ]
+            },
+            {
+              id: 'conversion',
+              title: 'Automate Tedious Conversions',
+              icon: '🔄',
+              description: 'Transform sketches into photorealistic renders or 2D plans into 3D axonometric views.',
+              features: [
+                'Sketch to render',
+                '2D to 3D conversion',
+                'Multiple view generation',
+                'Style consistency'
+              ]
+            },
+            {
+              id: 'immersive',
+              title: 'Create Immersive Client Experiences',
+              icon: '🥽',
+              description: 'Generate 360° panoramic images for VR or create cinematic video walkthroughs from static images.',
+              features: [
+                '360° panoramic generation',
+                'VR-ready outputs',
+                'Video walkthroughs',
+                'Interactive presentations'
+              ]
+            }
+          ];
+
+          const aiTools = [
+            {
+              name: 'Midjourney',
+              icon: '🎨',
+              bestFor: 'Artistic Vision & Concepts',
+              keyFeature: 'Unrivaled photorealism and high-fidelity stylistic control',
+              color: '#a855f7',
+              gradient: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)'
+            },
+            {
+              name: 'Nano Banana',
+              icon: '🍌',
+              bestFor: 'Realistic Editing & Iteration',
+              keyFeature: 'Precise, conversational editing of existing images and renders',
+              color: '#f59e0b',
+              gradient: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)'
+            },
+            {
+              name: 'Stable Diffusion',
+              icon: '⚙️',
+              bestFor: 'Advanced Custom Control',
+              keyFeature: 'Open-source with models like ControlNet for maintaining structural integrity',
+              color: '#3b82f6',
+              gradient: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)'
+            }
+          ];
+
+          return (
+            <div style={{
+              width: '100%',
+              minHeight: '100vh',
+              background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+              padding: '40px 20px',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              color: 'white'
+            }}>
+              <div style={{
+                maxWidth: '1800px',
+                margin: '0 auto'
+              }}>
+                {/* Header */}
+                <div style={{
+                  textAlign: 'center',
+                  marginBottom: '60px'
+                }}>
+                  <h1 style={{
+                    fontSize: '48px',
+                    fontWeight: '700',
+                    margin: '0 0 16px 0',
+                    background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    lineHeight: '1.2'
+                  }}>
+                    The AI-Powered Design Revolution
+                  </h1>
+                  <p style={{
+                    fontSize: '24px',
+                    color: '#94a3b8',
+                    margin: 0
+                  }}>
+                    Transforming Architecture & Interiors
+                  </p>
+                </div>
+
+                {/* Main Content Area - 3 Phases with Phase 2 emphasized */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 2fr 1fr',
+                  gap: '30px',
+                  marginBottom: '60px'
+                }}>
+                  {/* Phase 1: Conceptualization */}
+                  <div style={{
+                    background: 'rgba(59, 130, 246, 0.1)',
+                    border: '2px solid rgba(59, 130, 246, 0.3)',
+                    borderRadius: '24px',
+                    padding: '28px',
+                    backdropFilter: 'blur(10px)'
+                  }}>
+                    <div style={{
+                      textAlign: 'center',
+                      marginBottom: '24px'
+                    }}>
+                      <div style={{
+                        fontSize: '40px',
+                        marginBottom: '12px'
+                      }}>💡</div>
+                      <h2 style={{
+                        margin: '0 0 8px 0',
+                        fontSize: '24px',
+                        fontWeight: '700',
+                        color: '#60a5fa'
+                      }}>
+                        Phase 1
+                      </h2>
+                      <p style={{
+                        margin: 0,
+                        fontSize: '16px',
+                        fontWeight: '600'
+                      }}>
+                        Conceptualization & Ideation
+                      </p>
+                    </div>
+
+                    {phase1Sections.map((section) => (
+                      <div key={section.id} style={{
+                        marginBottom: '12px'
+                      }}>
+                        <div
+                          onClick={() => toggleSection('phase1-' + section.id)}
+                          style={{
+                            background: expandedSection === 'phase1-' + section.id 
+                              ? 'rgba(59, 130, 246, 0.2)' 
+                              : 'rgba(255, 255, 255, 0.05)',
+                            padding: '14px',
+                            borderRadius: '12px',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease',
+                            border: expandedSection === 'phase1-' + section.id 
+                              ? '2px solid #60a5fa' 
+                              : '2px solid transparent'
+                          }}
+                        >
+                          <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between'
+                          }}>
+                            <div style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '10px'
+                            }}>
+                              <span style={{ fontSize: '20px' }}>{section.icon}</span>
+                              <h3 style={{
+                                margin: 0,
+                                fontSize: '14px',
+                                fontWeight: '600'
+                              }}>
+                                {section.title}
+                              </h3>
+                            </div>
+                            <span style={{
+                              fontSize: '16px',
+                              transition: 'transform 0.3s ease',
+                              transform: expandedSection === 'phase1-' + section.id 
+                                ? 'rotate(180deg)' 
+                                : 'rotate(0deg)'
+                            }}>
+                              ▼
+                            </span>
+                          </div>
+
+                          {expandedSection === 'phase1-' + section.id && (
+                            <div style={{
+                              marginTop: '12px',
+                              paddingTop: '12px',
+                              borderTop: '1px solid rgba(255,255,255,0.1)',
+                              animation: 'fadeIn 0.3s ease'
+                            }}>
+                              <p style={{
+                                margin: '0 0 10px 0',
+                                color: '#cbd5e1',
+                                fontSize: '13px',
+                                lineHeight: '1.6'
+                              }}>
+                                {section.description}
+                              </p>
+                              <ul style={{
+                                margin: 0,
+                                padding: '0 0 0 18px',
+                                color: '#94a3b8',
+                                fontSize: '12px'
+                              }}>
+                                {section.features.map((feature, idx) => (
+                                  <li key={idx} style={{ marginBottom: '6px' }}>
+                                    {feature}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Phase 2: Design Development - EMPHASIZED */}
+                  <div style={{
+                    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%)',
+                    border: '3px solid rgba(16, 185, 129, 0.5)',
+                    borderRadius: '28px',
+                    padding: '36px',
+                    backdropFilter: 'blur(15px)',
+                    boxShadow: '0 20px 60px rgba(16, 185, 129, 0.3)'
+                  }}>
+                    <div style={{
+                      textAlign: 'center',
+                      marginBottom: '28px'
+                    }}>
+                      <div style={{
+                        fontSize: '56px',
+                        marginBottom: '16px'
+                      }}>🏗️</div>
+                      <h2 style={{
+                        margin: '0 0 10px 0',
+                        fontSize: '32px',
+                        fontWeight: '700',
+                        color: '#10b981'
+                      }}>
+                        Phase 2
+                      </h2>
+                      <p style={{
+                        margin: 0,
+                        fontSize: '20px',
+                        fontWeight: '600',
+                        lineHeight: '1.4'
+                      }}>
+                        Design Development, Plan Generation & Space Planning
+                      </p>
+                      <div style={{
+                        display: 'inline-block',
+                        marginTop: '12px',
+                        padding: '6px 16px',
+                        background: 'rgba(16, 185, 129, 0.2)',
+                        borderRadius: '20px',
+                        fontSize: '12px',
+                        fontWeight: '600',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px',
+                        color: '#6ee7b7'
+                      }}>
+                        Core Design Phase
+                      </div>
+                    </div>
+
+                    {phase2Sections.map((section) => (
+                      <div key={section.id} style={{
+                        marginBottom: '14px'
+                      }}>
+                        <div
+                          onClick={() => toggleSection('phase2-' + section.id)}
+                          style={{
+                            background: expandedSection === 'phase2-' + section.id 
+                              ? 'rgba(16, 185, 129, 0.25)' 
+                              : 'rgba(255, 255, 255, 0.08)',
+                            padding: '16px',
+                            borderRadius: '14px',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease',
+                            border: expandedSection === 'phase2-' + section.id 
+                              ? '2px solid #10b981' 
+                              : '2px solid transparent'
+                          }}
+                        >
+                          <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between'
+                          }}>
+                            <div style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '12px'
+                            }}>
+                              <span style={{ fontSize: '24px' }}>{section.icon}</span>
+                              <h3 style={{
+                                margin: 0,
+                                fontSize: '16px',
+                                fontWeight: '600'
+                              }}>
+                                {section.title}
+                              </h3>
+                            </div>
+                            <span style={{
+                              fontSize: '18px',
+                              transition: 'transform 0.3s ease',
+                              transform: expandedSection === 'phase2-' + section.id 
+                                ? 'rotate(180deg)' 
+                                : 'rotate(0deg)'
+                            }}>
+                              ▼
+                            </span>
+                          </div>
+
+                          {expandedSection === 'phase2-' + section.id && (
+                            <div style={{
+                              marginTop: '14px',
+                              paddingTop: '14px',
+                              borderTop: '1px solid rgba(255,255,255,0.15)',
+                              animation: 'fadeIn 0.3s ease'
+                            }}>
+                              <p style={{
+                                margin: '0 0 12px 0',
+                                color: '#d1fae5',
+                                fontSize: '14px',
+                                lineHeight: '1.6'
+                              }}>
+                                {section.description}
+                              </p>
+                              <ul style={{
+                                margin: 0,
+                                padding: '0 0 0 20px',
+                                color: '#a7f3d0',
+                                fontSize: '13px'
+                              }}>
+                                {section.features.map((feature, idx) => (
+                                  <li key={idx} style={{ marginBottom: '7px' }}>
+                                    {feature}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Phase 3: Visualization & Refinement */}
+                  <div style={{
+                    background: 'rgba(236, 72, 153, 0.1)',
+                    border: '2px solid rgba(236, 72, 153, 0.3)',
+                    borderRadius: '24px',
+                    padding: '28px',
+                    backdropFilter: 'blur(10px)'
+                  }}>
+                    <div style={{
+                      textAlign: 'center',
+                      marginBottom: '24px'
+                    }}>
+                      <div style={{
+                        fontSize: '40px',
+                        marginBottom: '12px'
+                      }}>🎨</div>
+                      <h2 style={{
+                        margin: '0 0 8px 0',
+                        fontSize: '24px',
+                        fontWeight: '700',
+                        color: '#f472b6'
+                      }}>
+                        Phase 3
+                      </h2>
+                      <p style={{
+                        margin: 0,
+                        fontSize: '16px',
+                        fontWeight: '600'
+                      }}>
+                        Visualization & Presentation
+                      </p>
+                    </div>
+
+                    {phase3Sections.map((section) => (
+                      <div key={section.id} style={{
+                        marginBottom: '12px'
+                      }}>
+                        <div
+                          onClick={() => toggleSection('phase3-' + section.id)}
+                          style={{
+                            background: expandedSection === 'phase3-' + section.id 
+                              ? 'rgba(236, 72, 153, 0.2)' 
+                              : 'rgba(255, 255, 255, 0.05)',
+                            padding: '14px',
+                            borderRadius: '12px',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease',
+                            border: expandedSection === 'phase3-' + section.id 
+                              ? '2px solid #f472b6' 
+                              : '2px solid transparent'
+                          }}
+                        >
+                          <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between'
+                          }}>
+                            <div style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '10px'
+                            }}>
+                              <span style={{ fontSize: '20px' }}>{section.icon}</span>
+                              <h3 style={{
+                                margin: 0,
+                                fontSize: '14px',
+                                fontWeight: '600'
+                              }}>
+                                {section.title}
+                              </h3>
+                            </div>
+                            <span style={{
+                              fontSize: '16px',
+                              transition: 'transform 0.3s ease',
+                              transform: expandedSection === 'phase3-' + section.id 
+                                ? 'rotate(180deg)' 
+                                : 'rotate(0deg)'
+                            }}>
+                              ▼
+                            </span>
+                          </div>
+
+                          {expandedSection === 'phase3-' + section.id && (
+                            <div style={{
+                              marginTop: '12px',
+                              paddingTop: '12px',
+                              borderTop: '1px solid rgba(255,255,255,0.1)',
+                              animation: 'fadeIn 0.3s ease'
+                            }}>
+                              <p style={{
+                                margin: '0 0 10px 0',
+                                color: '#cbd5e1',
+                                fontSize: '13px',
+                                lineHeight: '1.6'
+                              }}>
+                                {section.description}
+                              </p>
+                              <ul style={{
+                                margin: 0,
+                                padding: '0 0 0 18px',
+                                color: '#94a3b8',
+                                fontSize: '12px'
+                              }}>
+                                {section.features.map((feature, idx) => (
+                                  <li key={idx} style={{ marginBottom: '6px' }}>
+                                    {feature}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* AI Tool Selection Guide */}
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  borderRadius: '24px',
+                  padding: '40px',
+                  backdropFilter: 'blur(10px)',
+                  border: '2px solid rgba(255, 255, 255, 0.1)'
+                }}>
+                  <h2 style={{
+                    textAlign: 'center',
+                    fontSize: '32px',
+                    fontWeight: '700',
+                    margin: '0 0 40px 0',
+                    background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}>
+                    AI Tool Selection Guide
+                  </h2>
+
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                    gap: '24px'
+                  }}>
+                    {aiTools.map((tool) => (
+                      <div
+                        key={tool.name}
+                        onClick={() => setSelectedTool(selectedTool === tool.name ? null : tool.name)}
+                        style={{
+                          background: selectedTool === tool.name 
+                            ? tool.gradient 
+                            : 'rgba(255, 255, 255, 0.05)',
+                          padding: '24px',
+                          borderRadius: '16px',
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease',
+                          border: selectedTool === tool.name 
+                            ? `3px solid ${tool.color}` 
+                            : '3px solid transparent',
+                          transform: selectedTool === tool.name ? 'scale(1.05)' : 'scale(1)',
+                          boxShadow: selectedTool === tool.name 
+                            ? `0 12px 40px ${tool.color}40` 
+                            : 'none'
+                        }}
+                      >
+                        <div style={{
+                          fontSize: '48px',
+                          marginBottom: '16px'
+                        }}>
+                          {tool.icon}
+                        </div>
+                        <h3 style={{
+                          margin: '0 0 12px 0',
+                          fontSize: '24px',
+                          fontWeight: '700',
+                          color: selectedTool === tool.name ? 'white' : tool.color
+                        }}>
+                          {tool.name}
+                        </h3>
+                        <div style={{
+                          background: 'rgba(0, 0, 0, 0.2)',
+                          padding: '8px 12px',
+                          borderRadius: '8px',
+                          marginBottom: '12px'
+                        }}>
+                          <p style={{
+                            margin: 0,
+                            fontSize: '12px',
+                            fontWeight: '600',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            color: selectedTool === tool.name ? 'white' : '#fbbf24'
+                          }}>
+                            Best For
+                          </p>
+                          <p style={{
+                            margin: '4px 0 0 0',
+                            fontSize: '16px',
+                            fontWeight: '600',
+                            color: 'white'
+                          }}>
+                            {tool.bestFor}
+                          </p>
+                        </div>
+                        <p style={{
+                          margin: 0,
+                          fontSize: '14px',
+                          lineHeight: '1.5',
+                          color: selectedTool === tool.name ? 'rgba(255,255,255,0.9)' : '#cbd5e1'
+                        }}>
+                          {tool.keyFeature}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div style={{
+                  marginTop: '60px',
+                  textAlign: 'center',
+                  padding: '32px',
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  borderRadius: '16px',
+                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                }}>
+                  <p style={{
+                    color: '#94a3b8',
+                    fontSize: '14px',
+                    margin: 0,
+                    lineHeight: '1.6'
+                  }}>
+                    💡 <strong style={{ color: 'white' }}>Interactive Guide:</strong> Click on any section to expand and explore detailed features. Phase 2 is the core design development phase with the most comprehensive AI-powered tools.
+                  </p>
+                </div>
+              </div>
+
+              <style>{`
+                @keyframes fadeIn {
+                  from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                  }
+                  to {
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
+                
+                body {
+                  margin: 0;
+                  padding: 0;
+                  overflow-x: hidden;
+                }
+                
+                @media (max-width: 1400px) {
+                  div[style*="gridTemplateColumns: 1fr 2fr 1fr"] {
+                    grid-template-columns: 1fr !important;
+                  }
+                }
+                
+                @media (max-width: 768px) {
+                  div[style*="gridTemplateColumns"] {
+                    grid-template-columns: 1fr !important;
+                  }
+                  
+                  h1 {
+                    font-size: 32px !important;
+                  }
+                  
+                  h2 {
+                    font-size: 24px !important;
+                  }
+                }
+              `}</style>
+            </div>
+          );
+        }
+
+        ReactDOM.render(<AIDesignRevolution />, document.getElementById('root'));
+    </script>
+</body>
+</html>
